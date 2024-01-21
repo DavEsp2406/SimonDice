@@ -1,0 +1,21 @@
+package simondice;
+
+public class Jugador {
+
+	public String nombre;
+	public int puntuacion;
+	
+	public Jugador (String nombre, int puntuacion) {
+		this.nombre = nombre;
+		this.puntuacion = puntuacion;
+	}
+	
+	public String setNombre() {
+		return this.nombre;
+	}
+	
+	public int getPuntuacion() {
+		return this.puntuacion;
+	}
+	
+}

@@ -1,0 +1,36 @@
+package simondice;
+
+import java.util.Scanner;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Bienvenido a Simón dice!");
+		
+		System.out.print("Cual es tu nombre?");
+		
+		String name = sc.next();
+		
+		System.out.println("Hola " + name + ", presiona ENTER para empezar a jugar");
+		
+		char start = sc.next().charAt(0);
+		
+		textField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Acción a realizar cuando se presiona Enter
+                System.out.println("Enter presionado");
+            }
+        });
+	}
+}

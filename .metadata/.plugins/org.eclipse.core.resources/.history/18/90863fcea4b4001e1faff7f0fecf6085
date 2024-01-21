@@ -1,0 +1,8 @@
+package simondice;
+
+public class Main {
+
+	void play() {
+		Engine.play();
+	}
+}

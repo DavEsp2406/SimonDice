@@ -1,0 +1,31 @@
+package simondice;
+
+import java.util.Scanner;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Bienvenido a Simón dice!");
+
+		System.out.print("Cual es tu nombre?");
+
+		String name = sc.next();
+
+		System.out.println("Hola " + name + ", presiona ENTER para empezar a jugar");
+		
+		System.out.println("Presiona ENTER jugar...    ");
+        new Scanner(System.in).nextLine();
+
+        for (int k = 0; k < 30; k++) {
+            System.out.println();
+        }
+
+        
+        
+	}
+}

@@ -1,0 +1,16 @@
+package simondice;
+/**
+ * Este es mi proyecto de la segunda evalucion , Simon Dice 
+ * @author David Espeton Aparicio
+ */
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Engine eng = new Engine();
+        
+        Engine.play();
+        
+	}
+}
