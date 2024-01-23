@@ -6,18 +6,13 @@ import java.util.Random;
 
 public class Engine {
 
-	/**
-	 * Enum con los 4 colores
-	 */
 	public enum tColores {
 		ROJO, VERDE, AZUL, DORADO
 	};
 
-	private int z = 3;
+	private int secuenciaActual = 3;
 	
-	/**
-	 * Constante con la maxima secuencia
-	 */
+	
 	final int MAX_COLORES_SEQ = 12;
 	
 	/**
@@ -26,12 +21,119 @@ public class Engine {
 	private tColores[] secuenciaColores = new tColores[MAX_COLORES_SEQ];
 	
 
+	
+	
+	
+	
+	/**
+	 * metodo donde se ejecuta el juego 
+	 */
+	public void start() {
+
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("¡Bienvenido a Simon dice!");
+		System.out.println("¿Cuál es tu nombre?");
+		
+		String name = sc.next();
+		Jugador p1 = new Jugador(name);
+		p1.setNombre(name);
+
+		
+		
+		System.out.println("Hola " + p1.getNombre() + 
+				", presiona ENTER para empezar a jugar");
+		new Scanner(System.in).nextLine();//Linea para detectar ENTER
+		
+		
+		System.out.println("¿Qué deseas hacer " + p1.getNombre() + "?" + "\n");
+		
+		menu();
+		
+		int nselect = sc.nextInt();
+		
+		if(nselect == 0 || nselect == 1 || nselect == 2) {
+			
+		
+			do {
+				switch(nselect) {
+				
+				case 0:
+					System.out.println("¡Hasta luego " + p1.getNombre() + "!");
+					break;
+				case 1:
+					System.out.println("Iniciando el juego:" + "\n");
+					play();
+					break;
+				case 2:
+					System.out.println("Función aún no está implementado :)");
+					break;
+				}
+			}while(nselect != 0 && nselect != 1 && nselect != 2);	
+			
+		}else {
+			System.out.println("Número inválido");
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	public void play() {
+		
+		Boolean fallo = false;
+		
+		Scanner sc = new Scanner(System.in);
+		
+		int i = 1;
+		
+		generarSecuencia(4);
+		
+		do {
+			
+			System.out.println("Esta es la secuencia " + i );
+			i++;
+			mostrarSecuencia(secuenciaActual);	
+			
+			
+			
+			while(fallo == false ) {
+				System.out.println("\n" + "Introduce el caracter del color");
+				char cIntroducido = sc.next().charAt(0);
+				
+				comprobarColor( i, charToColor(cIntroducido));
+				
+				
+			}
+			
+			
+			secuenciaActual ++;
+			System.out.println("\n");
+			
+		}while(fallo == false && secuenciaActual < MAX_COLORES_SEQ);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * metodo para generar el menu
 	 */
 	public void menu () {
 		System.out.println("0 - Salir || 1 - Jugar || 2 - Aún no implementado");
 	}
+	
+	
 	
 	/**
 	 * Metodo que recibe un char como "v" y devuelve el color del enum "Verde"
@@ -59,11 +161,14 @@ public class Engine {
 		case 'd':
 			tipo = tColores.DORADO;
 			break;
+		default:
+			System.out.println("Introduce un caracter válido");
 		}
 		
-		return tipo;
-		
+		return tipo;	
 	}
+	
+	
 	
 	/**
 	 * Metodo que recibe un int y devuelve un color. El int recibido representa la posición del
@@ -91,8 +196,9 @@ public class Engine {
 		}
 		
 		return num;
-		
 	}
+	
+	
 	
 	/**
 	 * Metodo que genera una secuencia de colores aleatoria y lo mete en el array
@@ -101,6 +207,17 @@ public class Engine {
 	public void generarSecuencia (int _numColores) {
 		for(int i = 0; i < this.secuenciaColores.length; i++) {
 			this.secuenciaColores[i] = intToColor((int) (Math.random()*_numColores+1));
+		}
+	}
+	
+	
+	/**
+	 * Metodo que muestra la secuencia actual por pantalla
+	 * @param _numero numero de la secuencia actual
+	 */
+	public void mostrarSecuencia (int _numero) {
+		for(int i = 0; i < _numero; i++) {
+			System.out.print(mostrarColor(secuenciaColores[i]) + " ");
 		}
 	}
 	
@@ -121,23 +238,16 @@ public class Engine {
 		}
 				
 		return check;
-	
 	}
+	
+	
+	
 	
 	/**
-	 * Metodo que muestra la secuencia actual por pantalla
-	 * @param _numero numero de la secuencia actual
+	 * metodo que cambia el color de tColores a un string S
+	 * @param _color color que hay dentro del array tColores
+	 * @return
 	 */
-	public void mostrarSecuencia (int _numero) {
-		System.out.println("La secuencia es: ");
-		for(int i = 0; i < _numero; i++) {
-			System.out.print(mostrarColor(secuenciaColores[i]) + " ");
-		}
-		
-		
-	}
-	
-	
 	public String mostrarColor (tColores _color) {
 		
 		String colorString = null;
@@ -149,64 +259,15 @@ public class Engine {
 				break;
 			case AZUL:
 				colorString = "Azul";
+				break;
 			case VERDE:
 				colorString = "Verde";
+				break;
 			case DORADO:
 				colorString = "Dorado";
+				break;
 		}
 		
 		return colorString;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	/**
-	 * metodo donde se ejecuta el juego 
-	 */
-	public void start() {
-
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Bienvenido a Simón dice!");
-
-		System.out.print("Cual es tu nombre?");
-		
-		String name = sc.next();
-		
-		Jugador p1 = new Jugador(name);
-	
-		p1.setNombre(name);
-	
-		System.out.println("Hola " + p1.getNombre() + ", presiona ENTER para empezar a jugar");
-
-		new Scanner(System.in).nextLine();
-		
-		/**
-		 * "Bucle para el borrado de colores"
-		 */
-		
-		Engine wawa = new Engine ();
-		
-		for (int k = 0; k < 30; k++) {
-			System.out.println();
-		}	
-		
-		
-		
-		
-		generarSecuencia(4 );
-		
-		
-	
-		
-		mostrarSecuencia(z);
-		
 	}
 }
