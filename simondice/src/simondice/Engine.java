@@ -12,8 +12,9 @@ public class Engine {
 
 	private int secuenciaActual = 3;
 	
+	private int nJugadas = 0;
 	
-	final int MAX_COLORES_SEQ = 12;
+	final int MAX_COLORES_SEQ = 5;
 	
 	/**
 	 * Array donde se almacenan los colores
@@ -26,12 +27,15 @@ public class Engine {
 	
 	
 	/**
-	 * metodo donde se ejecuta el juego 
+	 * metodo donde se ejecuta el inicio y menu del juego
 	 */
 	public void start() {
 
 		Scanner sc = new Scanner(System.in);
 
+		if(nJugadas == 0) {
+			
+		
 		System.out.println("¡Bienvenido a Simon dice!");
 		System.out.println("¿Cuál es tu nombre?");
 		
@@ -39,7 +43,7 @@ public class Engine {
 		Jugador p1 = new Jugador(name);
 		p1.setNombre(name);
 
-		
+		nJugadas ++;
 		
 		System.out.println("Hola " + p1.getNombre() + 
 				", presiona ENTER para empezar a jugar");
@@ -47,6 +51,8 @@ public class Engine {
 		
 		
 		System.out.println("¿Qué deseas hacer " + p1.getNombre() + "?" + "\n");
+		
+		}
 		
 		menu();
 		
@@ -59,7 +65,7 @@ public class Engine {
 				switch(nselect) {
 				
 				case 0:
-					System.out.println("¡Hasta luego " + p1.getNombre() + "!");
+					System.out.println("¡Hasta luego!");
 					break;
 				case 1:
 					System.out.println("Iniciando el juego:" + "\n");
@@ -74,14 +80,13 @@ public class Engine {
 		}else {
 			System.out.println("Número inválido");
 		}
-		
-		
-		
 	}
 	
 	
 	
-	
+	/**
+	 * Metodo que ejecuta el juego 
+	 */
 	
 	public void play() {
 		
@@ -95,18 +100,40 @@ public class Engine {
 		
 		do {
 			
-			System.out.println("Esta es la secuencia " + i );
-			i++;
+			System.out.println("Esta es la secuencia " + i + ". Pulsa ENTER cuando estes listo." + "\n");
 			mostrarSecuencia(secuenciaActual);	
+			new Scanner(System.in).nextLine();
+			i++;
 			
+			for (int j = 0; j <= 50; j++ )
+				System.out.println();
+		
 			
+			int k = 1;
 			
-			while(fallo == false ) {
-				System.out.println("\n" + "Introduce el caracter del color");
+			int z = 0;
+			
+			while(fallo == false && k <= secuenciaActual )  {
+				
+				System.out.println("\n" + "Introduce el caracter del color nº" + k);
+				k++;
+				
 				char cIntroducido = sc.next().charAt(0);
 				
-				comprobarColor( i, charToColor(cIntroducido));
-				
+				if(String.valueOf(cIntroducido).matches("^[a-zA-Z]$")) {
+					if (comprobarColor(z, charToColor(cIntroducido)) == false) {
+						z++;
+						System.out.println("¡Correcto!");
+					}else {
+						fallo = true;
+						System.out.println("¡Fallaste!"  + "\n");
+						start();
+					}
+				}else {
+					System.out.println("Error, introduce un caracter válido." + "\n");
+					start();
+					fallo = true;
+				}
 				
 			}
 			
@@ -114,10 +141,13 @@ public class Engine {
 			secuenciaActual ++;
 			System.out.println("\n");
 			
-		}while(fallo == false && secuenciaActual < MAX_COLORES_SEQ);
+			if(k > MAX_COLORES_SEQ) {
+				System.out.println("¡Ganaste!" + "\n" + "\n" + "Volviendo al inicio" + "\n" +"\n" );
+				start();
+			}
+			
+		}while(fallo == false && secuenciaActual <= MAX_COLORES_SEQ);
 	}
-	
-	
 	
 	
 	
@@ -138,7 +168,7 @@ public class Engine {
 	/**
 	 * Metodo que recibe un char como "v" y devuelve el color del enum "Verde"
 	 * @param _color representa el caracter introducido por el usuario
-	 * @return
+	 * @return retorna un color del enum
 	 */
 	public tColores charToColor(char _color) {	
 		
@@ -161,8 +191,6 @@ public class Engine {
 		case 'd':
 			tipo = tColores.DORADO;
 			break;
-		default:
-			System.out.println("Introduce un caracter válido");
 		}
 		
 		return tipo;	
@@ -174,6 +202,7 @@ public class Engine {
 	 * Metodo que recibe un int y devuelve un color. El int recibido representa la posición del
 	 * color en el enum
 	 * @param _numero representa el número entero
+	 * @return retorna un color del enum
 	 */
 	tColores intToColor(int _numero) {
 		
@@ -227,7 +256,7 @@ public class Engine {
 	 * metodo que comprueba si el color introducido por el usuario es correcto o no
 	 * @param _index indice que ocupa el color dentro del array secuenciaColores
 	 * @param _color color introducido por el usuario
-	 * @return
+	 * @return retorna falso o verdadero dependiendo del si se cumple el if
 	 */
 	public boolean comprobarColor (int _index, tColores _color) {
 		
@@ -246,7 +275,7 @@ public class Engine {
 	/**
 	 * metodo que cambia el color de tColores a un string S
 	 * @param _color color que hay dentro del array tColores
-	 * @return
+	 * @return devuelve un string
 	 */
 	public String mostrarColor (tColores _color) {
 		
