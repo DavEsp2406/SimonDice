@@ -14,7 +14,7 @@ public class Engine {
 	
 	private int nJugadas = 0;
 	
-	final int MAX_COLORES_SEQ = 5;
+	final int MAX_COLORES_SEQ = 12;
 	
 	/**
 	 * Array donde se almacenan los colores
@@ -98,7 +98,11 @@ public class Engine {
 		
 		generarSecuencia(4);
 		
+		secuenciaActual = 3;
+		
 		do {
+			
+			
 			
 			System.out.println("Esta es la secuencia " + i + ". Pulsa ENTER cuando estes listo." + "\n");
 			mostrarSecuencia(secuenciaActual);	
@@ -112,6 +116,8 @@ public class Engine {
 			int k = 1;
 			
 			int z = 0;
+			
+			
 			
 			while(fallo == false && k <= secuenciaActual )  {
 				
