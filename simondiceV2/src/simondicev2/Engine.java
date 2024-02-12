@@ -14,7 +14,7 @@ public class Engine {
 		SALIR, FACIL, DIFICIL
 	}
 	
-	final int MAX_COLORES_SEQ = 4;
+	final int MAX_COLORES_SEQ = 15;
 	/**
 	 * Array donde se almacenan los colores
 	 */
@@ -27,7 +27,6 @@ public class Engine {
 	private int nJugadas = 0;
 	
 	private int ayudas = 3;
-	
 	
 	Jugador p1 = new Jugador(null);
 	
@@ -94,6 +93,8 @@ public class Engine {
 		Scanner sc = new Scanner(System.in);
 		
 		p1.setPuntuacion(0);
+		
+		ayudas = 3;
 		
 		int i = 1;//Variable que indica en que secuencia estás
 		
