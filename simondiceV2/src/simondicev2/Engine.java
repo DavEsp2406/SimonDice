@@ -22,7 +22,9 @@ public class Engine {
 	
 	private int secuenciaActual = 3;
 	
-	final int MAX_COLORES_GENERADOS = 7;
+	final int MAX_COLORES_FACIL = 4;
+	
+	final int MAX_COLORES_DIFICIL = 7;
 	
 	private int nJugadas = 0;
 	
@@ -39,22 +41,20 @@ public class Engine {
 
 		if(nJugadas == 0) {
 			
-		System.out.println("¡Bienvenido a Simon dice!");
-		System.out.println("¿Cuál es tu nombre?");
+			System.out.println("¡Bienvenido a Simon dice!");
+			System.out.println("¿Cuál es tu nombre?");
 		
-		String name = sc.next();
+			String name = sc.next();
 		
-		p1.setNombre(name);
+			p1.setNombre(name);
 
-		nJugadas ++;
+			nJugadas ++;
 		
-		System.out.println("Hola " + p1.getNombre() + 
+			System.out.println("Hola " + p1.getNombre() + 
 				", presiona ENTER para empezar a jugar");
-		new Scanner(System.in).nextLine();//Linea para detectar ENTER
+			new Scanner(System.in).nextLine();//Linea para detectar ENTER
 		
-		
-		System.out.println("¿Qué deseas hacer " + p1.getNombre() + "?" + "\n");
-		
+			System.out.println("¿Qué deseas hacer " + p1.getNombre() + "?" + "\n");
 		}
 		
 		menu();
@@ -99,9 +99,9 @@ public class Engine {
 		int i = 1;//Variable que indica en que secuencia estás
 		
 		if(_modo == tModo.FACIL) {
-			generarSecuencia(MAX_COLORES_GENERADOS - 3);
+			generarSecuencia(MAX_COLORES_FACIL);
 		}else if(_modo == tModo.DIFICIL){
-			generarSecuencia(MAX_COLORES_GENERADOS);
+			generarSecuencia(MAX_COLORES_DIFICIL);
 		}
 		
 		secuenciaActual = 3;//Variable que indica la cantidad de colores que aparecerán en la secuencia
@@ -116,7 +116,6 @@ public class Engine {
 				System.out.println();
 			
 			int nColores = 1;//Variable que indica el número del color a introducir
-			
 			int posColorArray = 0;//Posición que ocupa el color a introducir en el array
 			
 			while(fallo == false && nColores <= secuenciaActual )  {
@@ -163,19 +162,15 @@ public class Engine {
 					System.out.println("Tus puntos son " + p1.getPuntuacion());
 					start();
 					fallo = true;
-				}
-				
-			}
-			
+				}	
+			}	
 			if(_modo == tModo.FACIL) {
 				p1.sumarPuntuacion(5);
 			}else if(_modo == tModo.DIFICIL){
 				p1.sumarPuntuacion(10);
 			}
-			
 			secuenciaActual ++;
 			System.out.println("\n");
-			
 			if(nColores > MAX_COLORES_SEQ) {
 				System.out.println("¡Ganaste!" + "\n" + "\n" + "Volviendo al inicio" + "\n" +"\n" );
 				if(_modo == tModo.FACIL) {
@@ -189,7 +184,6 @@ public class Engine {
 				System.out.println("Tus puntos son " + p1.getPuntuacion());
 				start();
 			}
-			
 		}while(fallo == false && secuenciaActual <= MAX_COLORES_SEQ);
 	}
 	/**
@@ -249,7 +243,6 @@ public class Engine {
 			tipo = tColores.NARANJA;
 			break;
 		}
-		
 		return tipo;	
 	}
 	/**
@@ -286,7 +279,6 @@ public class Engine {
 			num = tColores.NARANJA;
 			break;
 		}
-		
 		return num;
 	}
 	/**
@@ -298,8 +290,6 @@ public class Engine {
 			this.secuenciaColores[i] = intToColor((int) (Math.random()*_numColores+1));
 		}
 	}
-	
-	
 	/**
 	 * Metodo que muestra la secuencia actual por pantalla
 	 * @param _numero numero de la secuencia actual
@@ -316,13 +306,10 @@ public class Engine {
 	 * @return retorna falso o verdadero dependiendo del si se cumple el if
 	 */
 	public boolean comprobarColor (int _index, tColores _color) {
-		
 		Boolean check = false;
-		
 		if (_color != secuenciaColores[_index] ) {
 			check = true;
-		}
-				
+		}	
 		return check;
 	}
 	/**
@@ -335,7 +322,6 @@ public class Engine {
 		String colorString = null;
 		
 		switch (_color) {
-		
 			case ROJO: 
 				colorString = "Rojo";
 				break;
