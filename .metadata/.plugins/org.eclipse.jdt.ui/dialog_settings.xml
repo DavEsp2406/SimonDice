@@ -49,13 +49,18 @@
 		<item key="nonavbar" value="false"/>
 		<item key="openinbrowser" value="false"/>
 		<item key="source" value="17"/>
-		<item key="antpath" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondice\javadoc.xml"/>
-		<item key="destdir" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondice\doc"/>
+		<item key="antpath" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondiceV2\javadoc.xml"/>
+		<item key="destdir" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondiceV2\doc"/>
 		<section name="projects">
-			<section name="simondice">
+			<section name="simondiceV1">
 				<item key="href" value=""/>
 				<item key="destdir" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondice\doc"/>
-				<item key="antpath" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondice\javadoc.xml"/>
+				<item key="antpath" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondiceV1\javadoc.xml"/>
+			</section>
+			<section name="simondiceV2">
+				<item key="href" value=""/>
+				<item key="destdir" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondiceV2\doc"/>
+				<item key="antpath" value="C:\Users\Usuario\Desktop\Proyecto programacion\simondiceV2\javadoc.xml"/>
 			</section>
 		</section>
 	</section>
