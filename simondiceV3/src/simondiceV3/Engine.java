@@ -1,4 +1,4 @@
-package simondicev2;
+package simondiceV3;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class Engine {
 	}
 	
 	public enum tModo {
-		SALIR, FACIL, DIFICIL
+		SALIR, FACIL, DIFICIL, TOP10, TOP1
 	}
 	
 	final int MAX_COLORES_SEQ = 15;
@@ -22,6 +22,8 @@ public class Engine {
 	
 	private int secuenciaActual = 3;
 	
+	final int MAX_JUGADORES = 0;
+	
 	final int MAX_COLORES_FACIL = 4;
 	
 	final int MAX_COLORES_DIFICIL = 7;
@@ -30,8 +32,7 @@ public class Engine {
 	
 	private int ayudas = 3;
 	
-	Jugador p1 = new Jugador(null);
-	
+	Jugador p1 = new Jugador (null);
 	/**
 	 * metodo donde se ejecuta el inicio y menu del juego
 	 */
@@ -61,7 +62,7 @@ public class Engine {
 		
 		int nselect = sc.nextInt();
 		
-		if(nselect >= 0 || nselect < 3) {
+		if(nselect >= 0 || nselect < 4) {
 			do {
 				switch(nselect) {
 				
@@ -70,14 +71,24 @@ public class Engine {
 					break;
 				case 1:
 					System.out.println("Iniciando el modo fácil" + "\n");
-					play(tModo.FACIL);
+					p1.setPuntuacion(play(tModo.FACIL));
+					System.out.println("Tus puntos son: " + p1.getPuntuacion());
 					break;
 				case 2:
 					System.out.println("Iniciando el modo difícil " + "\n");
-					play(tModo.DIFICIL);
+					p1.setPuntuacion(play(tModo.DIFICIL));
+					System.out.println("Tus puntos son: " + p1.getPuntuacion());
 					break;
+				case 3:
+					System.out.println("Mostrando top 10 jugadores " + "\n");
+					p1.setPuntuacion(play(tModo.TOP10));
+					break;
+				case 4:
+					System.out.println("Mostrando top 1 jugador(es) " + "\n");
+					p1.setPuntuacion(play(tModo.TOP1));
+					break;	
 				}
-			}while(nselect != 0 && nselect != 1 && nselect != 2);	
+			}while(!(nselect >= 0 && nselect < 4));	
 			
 		}else {
 			System.out.println("Número inválido");
@@ -87,12 +98,13 @@ public class Engine {
 	/**
 	 * Metodo que ejecuta el juego 
 	 */
-	public void play(tModo _modo) {
-		Boolean fallo = false;
-		
+	public int play(tModo _modo) {
 		Scanner sc = new Scanner(System.in);
 		
-		p1.setPuntuacion(0);
+		Boolean fallo = false;
+		int puntos = 0;
+		
+		puntos = 0;
 		
 		ayudas = 3;
 		
@@ -110,6 +122,7 @@ public class Engine {
 			System.out.println("Esta es la secuencia " + i + ". Pulsa ENTER cuando estes listo." + "\n");
 			mostrarSecuencia(secuenciaActual);	
 			new Scanner(System.in).nextLine();
+			
 			i++;
 			
 			for (int j = 0; j <= 50; j++ )
@@ -130,61 +143,61 @@ public class Engine {
 					if (cIntroducido == 'x' || cIntroducido == 'X') {
 						usarAyuda(posColorArray);
 						if(_modo == tModo.FACIL) {
-							p1.restarPuntuacion(8);
+							puntos -= 8;
 						}else if(_modo == tModo.DIFICIL){
-							p1.restarPuntuacion(16);
+							puntos -= 16;
 						}
 						cIntroducido = sc.next().charAt(0);
 					}
+					
 					if (comprobarColor(posColorArray, charToColor(cIntroducido)) == false) {
 						posColorArray++;
 						System.out.println("¡Correcto!");
 						
 						if(_modo == tModo.FACIL) {
-							p1.sumarPuntuacion(2);
+							puntos += 2;
 						}else if(_modo == tModo.DIFICIL){
-							p1.sumarPuntuacion(4);
+							puntos += 4;
 						}
 					}else {
 						fallo = true;
-						System.out.println("¡Fallaste!"  + "\n");
-						if(p1.getPuntuacion() < 0) {
-							p1.setPuntuacion(0);
+						System.out.println("¡Fallaste!");
+						if(puntos < 0) {
+							puntos = 0;
 						}
-						System.out.println("Tus puntos son " + p1.getPuntuacion());
-						start();
 					}
 				}else {
-					System.out.println("Error, introduce un caracter válido." + "\n");
-					if(p1.getPuntuacion() < 0) {
-						p1.setPuntuacion(0);
+					System.out.println("Error, introduce un caracter válido.");
+					if(puntos < 0) {
+						puntos = 0;
 					}
-					System.out.println("Tus puntos son " + p1.getPuntuacion());
-					start();
 					fallo = true;
 				}	
-			}	
-			if(_modo == tModo.FACIL) {
-				p1.sumarPuntuacion(5);
-			}else if(_modo == tModo.DIFICIL){
-				p1.sumarPuntuacion(10);
 			}
+			if(posColorArray == secuenciaActual)
+				if(_modo == tModo.FACIL) {
+					puntos += 5;
+				}else if(_modo == tModo.DIFICIL){
+					puntos += 10;
+				}
+			
 			secuenciaActual ++;
 			System.out.println("\n");
+			
 			if(nColores > MAX_COLORES_SEQ) {
 				System.out.println("¡Ganaste!" + "\n" + "\n" + "Volviendo al inicio" + "\n" +"\n" );
 				if(_modo == tModo.FACIL) {
-					p1.sumarPuntuacion(40);
+					puntos += 40;
 				}else if(_modo == tModo.DIFICIL){
-					p1.sumarPuntuacion(80);
+					puntos += 80;
 				}
-				if(p1.getPuntuacion() < 0) {
-					p1.setPuntuacion(0);
+				if(puntos < 0) {
+					puntos = 0;
 				}
-				System.out.println("Tus puntos son " + p1.getPuntuacion());
-				start();
 			}
 		}while(fallo == false && secuenciaActual <= MAX_COLORES_SEQ);
+		
+		return puntos;
 		
 	}
 	/**
@@ -206,8 +219,9 @@ public class Engine {
 	/**
 	 * metodo para generar el menu
 	 */
-	public void menu () {
-		System.out.println("0 - Salir || 1 - Jugar en modo fácil || 2 - Jugar en modo dificil");
+	public void menu() {
+		System.out.println("0 - Salir \n1 - Jugar en modo fácil \n2 - Jugar en modo dificl \n3 - Ver top 10 jugadores"
+				+ "\n4 - Ver top 1 jugador(es)");
 	}
 	/**
 	 * Metodo que recibe un char como "v" y devuelve el color del enum "Verde"
