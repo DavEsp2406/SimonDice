@@ -11,7 +11,7 @@ public class Engine {
 	}
 	
 	public enum tModo {
-		SALIR, FACIL, DIFICIL, TOP10, TOP1
+		FACIL, DIFICIL
 	}
 	
 	final int MAX_COLORES_SEQ = 15;
@@ -32,14 +32,26 @@ public class Engine {
 	
 	private int ayudas = 3;
 	
-	Jugador p1 = new Jugador (null);
+
 	/**
 	 * metodo donde se ejecuta el inicio y menu del juego
 	 */
 	public void start() {
 
 		Scanner sc = new Scanner(System.in);
-
+		
+		Record record = new Record ();
+		
+		Jugador p1 = new Jugador (null, 0);
+		Jugador p2 = new Jugador ("OwO" ,87);
+		Jugador p3 = new Jugador ("T.T",21);
+		Jugador p4 = new Jugador (">.<", 87);
+		record.añadirJugador(p1);
+		record.añadirJugador(p2);
+		record.añadirJugador(p3);
+		record.añadirJugador(p4);
+		
+		
 		if(nJugadas == 0) {
 			
 			System.out.println("¡Bienvenido a Simon dice!");
@@ -58,12 +70,12 @@ public class Engine {
 			System.out.println("¿Qué deseas hacer " + p1.getNombre() + "?" + "\n");
 		}
 		
-		menu();
+		int nselect;
 		
-		int nselect = sc.nextInt();
-		
-		if(nselect >= 0 || nselect < 4) {
 			do {
+				menu();
+				nselect = sc.nextInt();
+		
 				switch(nselect) {
 				
 				case 0:
@@ -81,20 +93,17 @@ public class Engine {
 					break;
 				case 3:
 					System.out.println("Mostrando top 10 jugadores " + "\n");
-					p1.setPuntuacion(play(tModo.TOP10));
+					record.showRanking();
 					break;
 				case 4:
 					System.out.println("Mostrando top 1 jugador(es) " + "\n");
-					p1.setPuntuacion(play(tModo.TOP1));
+					record.showBestPlayer();
 					break;	
+				default:
+					System.out.println("Introduce un número válido");
 				}
-			}while(!(nselect >= 0 && nselect < 4));	
-			
-		}else {
-			System.out.println("Número inválido");
+			}while(!(nselect == 0));		
 		}
-	}
-	
 	/**
 	 * Metodo que ejecuta el juego 
 	 */
@@ -220,7 +229,7 @@ public class Engine {
 	 * metodo para generar el menu
 	 */
 	public void menu() {
-		System.out.println("0 - Salir \n1 - Jugar en modo fácil \n2 - Jugar en modo dificl \n3 - Ver top 10 jugadores"
+		System.out.println("\n0 - Salir \n1 - Jugar en modo fácil \n2 - Jugar en modo dificl \n3 - Ver top 10 jugadores"
 				+ "\n4 - Ver top 1 jugador(es)");
 	}
 	/**
