@@ -1,4 +1,4 @@
-package simondiceV3;
+package main;
 
 public class Jugador {
 

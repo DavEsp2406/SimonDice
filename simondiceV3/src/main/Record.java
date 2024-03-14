@@ -1,6 +1,6 @@
-package simondiceV3;
+package main;
 
-import simondiceV3.Engine.tColores;
+import main.Engine.tColores;
 
 public class Record {
 
@@ -20,9 +20,11 @@ public class Record {
 	 * Metodo que sirve para añadir un jugador al array
 	 * @param _player Nombre del jugador introducido
 	 */
-	public void añadirJugador(Jugador _player) {
-		this.jugadoresPartida[this.contador] = _player;
-		this.contador ++;
+	public void aniadirJugador(Jugador _player) {
+		if (contador < MAX_JUGADORES) {
+			this.jugadoresPartida[this.contador] = _player;
+			this.contador ++;
+		}
 	}
 	/**
 	 * Metodo que ordena el array de manera descendente
@@ -42,7 +44,6 @@ public class Record {
 	 * Metodo que enseña los n mejores jugadores
 	 */
 	public void showRanking() {
-		ordenarRanking();
 		int n = 0;
 		while ( n < contador) {
 			System.out.print(jugadoresPartida[n].getNombre());
@@ -55,16 +56,14 @@ public class Record {
 	 * y tengan la misma puntuación
 	 */
 	public void showBestPlayer() {
-		ordenarRanking();
 		int n = 0;
 		
-		while (n < contador) {
-			if (jugadoresPartida[0].getPuntuacion() == jugadoresPartida[n].getPuntuacion()) {				
+		while (jugadoresPartida[0].getPuntuacion() == jugadoresPartida[n].getPuntuacion()) {
+			
 				System.out.print(jugadoresPartida[n].getNombre());
 				System.out.println(" -> " + jugadoresPartida[n].getPuntuacion());
 				n++;
-			}	
 		}
-		
 	}
 }
+

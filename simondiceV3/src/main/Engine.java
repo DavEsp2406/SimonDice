@@ -1,7 +1,6 @@
-package simondiceV3;
+package main;
 
 import java.util.Scanner;
-
 import java.util.Random;
 
 public class Engine {
@@ -41,15 +40,28 @@ public class Engine {
 		Scanner sc = new Scanner(System.in);
 		
 		Record record = new Record ();
-		
 		Jugador p1 = new Jugador (null, 0);
+		record.aniadirJugador(p1);
 		Jugador p2 = new Jugador ("OwO" ,87);
+		record.aniadirJugador(p2);
 		Jugador p3 = new Jugador ("T.T",21);
+		record.aniadirJugador(p3);
 		Jugador p4 = new Jugador (">.<", 87);
-		record.añadirJugador(p1);
-		record.añadirJugador(p2);
-		record.añadirJugador(p3);
-		record.añadirJugador(p4);
+		record.aniadirJugador(p4);
+		Jugador p5 = new Jugador ("^_^", 420); 
+		record.aniadirJugador(p5);
+		Jugador p6 = new Jugador ("^0^", 13);
+		record.aniadirJugador(p6);
+		Jugador p7 = new Jugador ("U_U", 2); 
+		record.aniadirJugador(p7);
+		Jugador p8 = new Jugador ("(｡･∀･)ﾉﾞ", 420);
+		record.aniadirJugador(p8);
+		Jugador p9 = new Jugador ("(￣o￣) . zZ", 69);
+		record.aniadirJugador(p9);
+		Jugador p10 = new Jugador ("✪ ω ✪", 44);
+		record.aniadirJugador(p10);
+		Jugador p11 = new Jugador ("♪(´▽｀)", 4);
+		record.aniadirJugador(p11);
 		
 		
 		if(nJugadas == 0) {
@@ -93,14 +105,17 @@ public class Engine {
 					break;
 				case 3:
 					System.out.println("Mostrando top 10 jugadores " + "\n");
+					record.ordenarRanking();
 					record.showRanking();
 					break;
 				case 4:
 					System.out.println("Mostrando top 1 jugador(es) " + "\n");
+					record.ordenarRanking();
 					record.showBestPlayer();
 					break;	
 				default:
 					System.out.println("Introduce un número válido");
+					break;
 				}
 			}while(!(nselect == 0));		
 		}

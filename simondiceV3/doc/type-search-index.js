@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"simondiceV3","l":"Engine"},{"p":"simondiceV3","l":"Jugador"},{"p":"simondiceV3","l":"Main"},{"p":"simondiceV3","l":"Record"},{"p":"simondiceV3","l":"Engine.tColores"},{"p":"simondiceV3","l":"Engine.tModo"}];updateSearchResults();

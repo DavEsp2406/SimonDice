@@ -1,4 +1,5 @@
-package simondiceV3;
+package main;
+
 /**
  * Este es mi proyecto de la segunda evalucion , Simon Dice versión 2 
  * @author David Espeton Aparicio
