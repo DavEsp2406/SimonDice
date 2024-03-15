@@ -8,9 +8,9 @@ public class Jugador {
 	 * Constructora que instancia el nombre y la puntuación
 	 * @param nombre
 	 */
-	public Jugador (String nombre, int puntuacion) {
+	public Jugador (String nombre) {
 		this.nombre = nombre;
-		this.puntuacion = puntuacion;
+		this.puntuacion = 0;
 	}
 	/**
 	 * Metodo para devolver el nombre del jugador
